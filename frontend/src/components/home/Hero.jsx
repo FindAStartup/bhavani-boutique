@@ -1,0 +1,37 @@
+import React from 'react';
+
+const Hero = () => {
+    return (
+        <section className="relative h-[500px] rounded-3xl overflow-hidden mb-8 shadow-2xl">
+            <img
+                alt="New collection featuring silk dresses"
+                className="absolute inset-0 w-full h-full object-cover"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNH1JAMSZLWW_8WViyGwz-By_GhliuZ7_vy7QzwDdIrQeRuxHxKu2QwEM6eQXCtDkMiHvch2tgqPeO0StFIoeqHsQfbpUWUnUpaSHvTHNc3T4_NFVjGLwfOcjcvUjia9cRAUtJvj5k1_sB_x6VTdv4wpSoRgRB4qRQCVJEIRuiqbofGaHcyFpq3p2HJJQSzZacUtUXAxkCMZQRo0mXZcyUJFRh0hgv6EM2ds16o8goe8sGXS2uHpzktHNIQgrd7s3k9T1x9VYhrWrL"
+            />
+
+            {/* Gradient Overlay defined in index.html, adding here as inline or class if configured. 
+          The original code had .hero-gradient class. I'll add the style here or in css. 
+          Using inline style for simplicity to mimic the html style block provided. */}
+            <div
+                className="absolute inset-0 flex flex-col justify-center px-6 md:px-12 lg:px-20 text-white"
+                style={{ background: 'linear-gradient(to right, rgba(0,0,0,0.6), transparent)' }}
+            >
+                <span className="text-xs md:text-sm uppercase tracking-[0.3em] font-medium mb-4 animate-pulse">New Arrivals</span>
+                <h1 className="text-3xl md:text-5xl lg:text-7xl font-serif mb-6 leading-tight max-w-2xl">
+                    Effortless Elegance <br /> <span className="italic text-brand-gold">The Monsoon Edit</span>
+                </h1>
+                <p className="text-sm md:text-lg text-stone-200 mb-8 max-w-md font-light leading-relaxed">
+                    Discover our handcrafted collection of luxury dresses designed for the modern woman who values tradition and style.
+                </p>
+                <div>
+                    <button className="bg-primary hover:bg-[#5d6b2e] text-white px-8 py-3 md:px-10 md:py-4 text-sm md:text-base rounded-full font-semibold transition-all shadow-lg hover:shadow-primary/30 flex items-center gap-2 group">
+                        Explore Collection
+                        <span className="material-icons-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+    );
+};
+
+export default Hero;

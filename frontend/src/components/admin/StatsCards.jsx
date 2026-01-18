@@ -1,0 +1,54 @@
+import React from 'react';
+import { IndianRupee, ShoppingCart, Archive, TrendingUp, AlertTriangle } from 'lucide-react';
+
+const StatsCards = () => {
+    const cards = [
+        {
+            title: 'Total Sales',
+            value: '₹1,24,500',
+            icon: <IndianRupee size={40} className="text-gold" />,
+            color: 'gold',
+            trendIcon: <TrendingUp size={16} className="mr-1" />,
+            trendColor: 'text-emerald-500',
+        },
+        {
+            title: 'Total Orders',
+            value: '156',
+            icon: <ShoppingCart size={40} className="text-primary" />,
+            color: 'primary',
+            trendIcon: <TrendingUp size={16} className="mr-1" />,
+            trendColor: 'text-emerald-500',
+        },
+        {
+            title: 'Stock Alerts',
+            value: '12 Items',
+            icon: <Archive size={40} className="text-maroon" />,
+            color: 'maroon',
+            trendIcon: <AlertTriangle size={16} className="mr-1" />,
+            trendColor: 'text-maroon',
+        },
+    ];
+
+    return (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            {cards.map((card, index) => (
+                <div key={index} className="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 relative overflow-hidden group">
+
+                    <div className="flex items-center justify-between relative z-10">
+                        <div>
+                            <p className="text-slate-500 text-sm font-medium uppercase tracking-wider">{card.title}</p>
+                            <h3 className="text-2xl font-bold mt-2">{card.value}</h3>
+                            <div className={`flex items-center mt-2  text-sm font-semibold`}>
+                            </div>
+                        </div>
+                        <div className={`p-3 bg-${card.color}/10 rounded-xl`}>
+                            {card.icon}
+                        </div>
+                    </div>
+                </div>
+            ))}
+        </div>
+    );
+};
+
+export default StatsCards;

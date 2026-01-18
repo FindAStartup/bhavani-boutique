@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation - Bhavana Boutique</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #334155;
+            background-color: #f8fafc;
+            padding: 20px;
+        }
+
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #8B4789 0%, #C45ABA 100%);
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            background: #ffffff;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: bold;
+            color: #8B4789;
+            margin-bottom: 15px;
+        }
+
+        .header-title {
+            color: #ffffff;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .header-subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 14px;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .success-badge {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: #ffffff;
+            padding: 12px 24px;
+            border-radius: 50px;
+            display: inline-block;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .order-number {
+            background: #f8fafc;
+            border: 2px dashed #cbd5e1;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .order-number-label {
+            font-size: 12px;
+            color: #64748b;
+            margin-bottom: 5px;
+        }
+
+        .order-number-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1e293b;
+            font-family: 'Courier New', monospace;
+        }
+
+        .order-details {
+            margin: 30px 0;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .detail-label {
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        .detail-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .total-row {
+            background: #faf5ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .total-row .detail-value {
+            font-size: 18px;
+            color: #8B4789;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #8B4789 0%, #C45ABA 100%);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            margin: 20px 0;
+            box-shadow: 0 4px 12px rgba(139, 71, 137, 0.3);
+        }
+
+        .footer {
+            background: #f8fafc;
+            padding: 30px 40px;
+            text-align: center;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .footer-text {
+            font-size: 12px;
+            color: #94a3b8;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="email-container">
+        <div class="header">
+            <div class="logo">BB</div>
+            <div class="header-title">Order Confirmed!</div>
+            <div class="header-subtitle">Thank you for your purchase</div>
+        </div>
+
+        <div class="content">
+            <div style="text-align: center;">
+                <span class="success-badge">✓ Payment Successful</span>
+            </div>
+
+            <h2 style="font-size: 22px; color: #1e293b; margin: 20px 0;">Hello {{CUSTOMER_NAME}},</h2>
+
+            <p style="font-size: 15px; color: #475569; margin-bottom: 20px;">
+                We've received your order and are getting it ready. You'll receive a shipping confirmation email
+                with tracking details once your order is on its way.
+            </p>
+
+            <div class="order-number">
+                <div class="order-number-label">Order Number</div>
+                <div class="order-number-value">#{{ORDER_NUMBER}}</div>
+            </div>
+
+            <div class="order-details">
+                <h3 style="font-size: 16px; color: #1e293b; margin-bottom: 15px;">Order Summary</h3>
+
+                <div class="detail-row">
+                    <span class="detail-label">Order Date</span>
+                    <span class="detail-value">{{ORDER_DATE}}</span>
+                </div>
+
+                <div class="detail-row">
+                    <span class="detail-label">Estimated Delivery</span>
+                    <span class="detail-value">{{DELIVERY_DATE}}</span>
+                </div>
+
+                <div class="detail-row">
+                    <span class="detail-label">Shipping Address</span>
+                    <span class="detail-value">{{SHIPPING_ADDRESS}}</span>
+                </div>
+
+                <div class="detail-row">
+                    <span class="detail-label">Payment Method</span>
+                    <span class="detail-value">{{PAYMENT_METHOD}}</span>
+                </div>
+
+                <div class="total-row detail-row" style="border: none;">
+                    <span class="detail-label" style="font-size: 16px; font-weight: 600; color: #1e293b;">Total
+                        Amount</span>
+                    <span class="detail-value">₹{{TOTAL_AMOUNT}}</span>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin: 30px 0;">
+                <a href="{{ORDER_TRACKING_LINK}}" class="cta-button">Track Your Order</a>
+            </div>
+
+            <div
+                style="background: #fef3c7; border-left: 4px solid #f59e0b; padding: 15px; border-radius: 4px; margin: 20px 0;">
+                <p style="font-size: 13px; color: #92400e;">
+                    <strong>Need Help?</strong> Contact our support team at
+                    <a href="mailto:support@bhavanaboutique.com" style="color: #92400e;">support@bhavanaboutique.com</a>
+                </p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p class="footer-text">
+                © 2026 Bhavana Boutique. All rights reserved.<br>
+                Redefining <em>Timeless</em> Style.
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>
