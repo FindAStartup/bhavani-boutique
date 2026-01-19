@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../supabaseClient';
 
 const SignupForm = () => {
-    const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', password: '' });
+    const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', phone: '', password: '' });
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
@@ -23,6 +23,7 @@ const SignupForm = () => {
                     data: {
                         first_name: formData.firstName,
                         last_name: formData.lastName,
+                        phone: formData.phone,
                     }
                 }
             });
@@ -99,6 +100,17 @@ const SignupForm = () => {
                         onChange={handleChange}
                         placeholder="alex@example.com"
                         required
+                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all"
+                    />
+                </div>
+                <div>
+                    <label className="block text-xs font-bold uppercase tracking-widest text-slate-600 mb-2">Phone Number</label>
+                    <input
+                        type="tel"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        placeholder="+91 98765 43210"
                         className="w-full px-4 py-3 bg-slate-50 border border-slate-200 focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all"
                     />
                 </div>

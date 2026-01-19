@@ -81,8 +81,8 @@ const Header = () => {
         <>
             <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-stone-200">
                 <div className="w-full px-6 lg:px-12 h-16 lg:h-[72px] flex items-center justify-between relative">
-                    <div className="flex items-center gap-3">
-                        <Link to="/" className="flex items-center gap-3">
+                    <div className="flex items-center gap-1">
+                        <Link to="/" className="flex items-center gap-1">
                             <img src={bbLogo} alt="Bhavani Boutique Logo" className="h-8 sm:h-12 w-auto object-contain" />
                             <span className="font-display text-lg sm:text-xl tracking-widest uppercase text-brand-maroon block">Bhavani Boutique</span>
                         </Link>
@@ -107,6 +107,12 @@ const Header = () => {
                             className={`transition-all pb-1 ${location.pathname === '/about' ? 'text-primary border-b-2 border-primary' : 'hover:text-primary border-b-2 border-transparent'}`}
                         >
                             About Us
+                        </Link>
+                        <Link
+                            to="/contact"
+                            className={`transition-all pb-1 ${location.pathname === '/contact' ? 'text-primary border-b-2 border-primary' : 'hover:text-primary border-b-2 border-transparent'}`}
+                        >
+                            Contact Us
                         </Link>
                     </nav>
 
@@ -222,6 +228,10 @@ const Header = () => {
                                     <Link to="/about" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium text-slate-800 hover:text-primary flex items-center gap-4">
                                         <span className="material-icons-outlined text-stone-400">storefront</span>
                                         About Us
+                                    </Link>
+                                    <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium text-slate-800 hover:text-primary flex items-center gap-4">
+                                        <span className="material-icons-outlined text-stone-400">phone</span>
+                                        Contact Us
                                     </Link>
                                 </nav>
                             </div>

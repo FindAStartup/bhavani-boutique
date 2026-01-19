@@ -10,6 +10,7 @@ import ProductDetails from './pages/ProductDetails';
 import CategoryProducts from './pages/CategoryProducts';
 import Wishlist from './pages/Wishlist';
 import AboutUs from './pages/AboutUs';
+import ContactUs from './pages/ContactUs';
 import AdminRoute from './components/auth/AdminRoute';
 import './App.css';
 
@@ -21,6 +22,7 @@ function App() {
         <Route path="/category/:category" element={<CategoryProducts />} />
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/about" element={<AboutUs />} />
+        <Route path="/contact" element={<ContactUs />} />
         <Route path="/login" element={<AuthPage />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />

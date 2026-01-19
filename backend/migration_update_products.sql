@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS public.products (
   sustainability_impact text, -- Sustainability information
   delivery_days int DEFAULT 7, -- Estimated delivery days
   is_draft boolean DEFAULT false, -- Draft status
-  created_at timestamp with time zone DEFAULT timezone('utc'::text, now()),
+  created_at timestamp with time zone DEFAULT timezone('utc'::text, now()),;
   updated_at timestamp with time zone DEFAULT timezone('utc'::text, now())
 );
 

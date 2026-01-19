@@ -2,7 +2,7 @@ import React from 'react';
 
 const Hero = () => {
     return (
-        <section className="relative h-[500px] rounded-3xl overflow-hidden mb-8 shadow-2xl">
+        <section className="relative h-[300px] md:h-[450px] rounded-3xl overflow-hidden mb-4 shadow-2xl">
             <img
                 alt="New collection featuring silk dresses"
                 className="absolute inset-0 w-full h-full object-cover"

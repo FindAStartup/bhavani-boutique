@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import bbLogo from '../../assets/BB_Black.png';
 
 const Footer = () => {
@@ -7,7 +8,7 @@ const Footer = () => {
             <div className="w-full px-6 lg:px-12">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
                     <div className="col-span-1 md:col-span-1">
-                        <div className="flex items-center gap-3 mb-6">
+                        <div className="flex items-center gap-1 mb-6">
                             <img src={bbLogo} alt="Bhavani Boutique" className="h-10 w-auto" />
                             <span className="text-xl font-serif font-medium tracking-widest text-[#5d1818] uppercase">Bhavani Boutique</span>
                         </div>
@@ -18,18 +19,18 @@ const Footer = () => {
                     <div>
                         <h4 className="font-bold text-sm uppercase tracking-widest mb-6">Shopping</h4>
                         <ul className="space-y-4 text-sm text-slate-500">
-                            <li><a className="hover:text-primary transition-colors" href="#">Cordset</a></li>
-                            <li><a className="hover:text-primary transition-colors" href="#">Saree</a></li>
-                            <li><a className="hover:text-primary transition-colors" href="#">Kurties</a></li>
-                            <li><a className="hover:text-primary transition-colors" href="#">Set Mund</a></li>
-                            <li><a className="hover:text-primary transition-colors" href="#">Bottoms</a></li>
+                            <li><Link className="hover:text-primary transition-colors" to="/category/Corset">Corset</Link></li>
+                            <li><Link className="hover:text-primary transition-colors" to="/category/Saree">Saree</Link></li>
+                            <li><Link className="hover:text-primary transition-colors" to="/category/Kurties">Kurties</Link></li>
+                            <li><Link className="hover:text-primary transition-colors" to="/category/Set-mund">Set Mund</Link></li>
+                            <li><Link className="hover:text-primary transition-colors" to="/category/Bottoms">Bottoms</Link></li>
                         </ul>
                     </div>
                     <div>
                         <h4 className="font-bold text-sm uppercase tracking-widest mb-6">Customer Care</h4>
                         <ul className="space-y-4 text-sm text-slate-500">
-                            <li><a className="hover:text-primary transition-colors" href="#">Contact Us</a></li>
-                            <li><a className="hover:text-primary transition-colors" href="#">About Us</a></li>
+                            <li><Link className="hover:text-primary transition-colors" to="/contact">Contact Us</Link></li>
+                            <li><Link className="hover:text-primary transition-colors" to="/about">About Us</Link></li>
                             <li><a className="hover:text-primary transition-colors" href="#">Size Guide</a></li>
                             <li><a className="hover:text-primary transition-colors" href="#">FAQs</a></li>
                         </ul>
