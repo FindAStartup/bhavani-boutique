@@ -13,7 +13,7 @@ const ContactMap = () => {
                 marginWidth="0"
                 src="https://maps.google.com/maps?q=9.245495,76.5379389&hl=es;z=14&output=embed"
                 title="Bhavani Boutique Location"
-                className="filter grayscale hover:grayscale-0 transition-all duration-500"
+                className="filter saturate-150 contrast-110"
             >
             </iframe>
 

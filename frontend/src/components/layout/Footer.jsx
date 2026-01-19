@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Facebook, Twitter, Instagram, Globe } from 'lucide-react';
 import bbLogo from '../../assets/BB_Black.png';
 
 const Footer = () => {
@@ -42,14 +43,14 @@ const Footer = () => {
                             <li><a className="hover:text-primary transition-colors" href="#">Terms of Service</a></li>
                         </ul>
                         <div className="flex gap-4 mb-6">
-                            <a className="w-10 h-10 rounded-full border border-stone-200 flex items-center justify-center hover:bg-primary hover:text-white transition-all" href="#">
-                                <span className="material-icons-outlined text-lg">public</span>
+                            <a className="w-10 h-10 rounded-full border border-stone-200 flex items-center justify-center hover:bg-primary hover:text-white transition-all" href="https://www.bhavaniboutiques.in" target="_blank" rel="noopener noreferrer">
+                                <Globe className="w-5 h-5" />
                             </a>
-                            <a className="w-10 h-10 rounded-full border border-stone-200 flex items-center justify-center hover:bg-primary hover:text-white transition-all" href="#">
-                                <span className="material-icons-outlined text-lg">share</span>
+                            <a className="w-10 h-10 rounded-full border border-stone-200 flex items-center justify-center hover:bg-primary hover:text-white transition-all" href="https://www.facebook.com/share/16mvyfJibH/" target="_blank" rel="noopener noreferrer">
+                                <Facebook className="w-5 h-5" />
                             </a>
-                            <a className="w-10 h-10 rounded-full border border-stone-200 flex items-center justify-center hover:bg-primary hover:text-white transition-all" href="#">
-                                <span className="material-icons-outlined text-lg">camera_alt</span>
+                            <a className="w-10 h-10 rounded-full border border-stone-200 flex items-center justify-center hover:bg-primary hover:text-white transition-all" href="https://www.instagram.com/bhavaniboutique_?igsh=c3VteGNiZ2ZzZGEx" target="_blank" rel="noopener noreferrer">
+                                <Instagram className="w-5 h-5" />
                             </a>
                         </div>
                         <p className="text-xs text-slate-400">© 2026 Bhavani Boutique Home. All rights reserved.</p>

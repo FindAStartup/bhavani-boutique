@@ -1,5 +1,5 @@
 import React from 'react';
-import { MapPin, Phone, Mail, Share2, Camera, Globe } from 'lucide-react';
+import { MapPin, Phone, Mail, Globe, Facebook, Instagram } from 'lucide-react';
 
 const ContactInfo = () => {
     return (
@@ -25,7 +25,7 @@ const ContactInfo = () => {
                         </div>
                         <div className="flex flex-col">
                             <p className="text-xs uppercase tracking-widest text-[#7c8560] mb-1 font-sans font-semibold">Phone</p>
-                            <p className="text-lg text-gray-800 dark:text-gray-200">+91 08848744276</p>
+                            <a href="tel:9446304423" className="text-lg text-gray-800 dark:text-gray-200 hover:text-primary transition-colors">9446304423</a>
                         </div>
                     </div>
 
@@ -46,13 +46,13 @@ const ContactInfo = () => {
             <div className="pt-8 border-t border-[#eff0ea] dark:border-[#2a2c22]">
                 <p className="text-sm font-medium mb-4 uppercase tracking-widest text-[#7c8560] font-sans font-semibold">Follow our journey</p>
                 <div className="flex gap-4">
-                    <a href="#" className="w-10 h-10 flex items-center justify-center rounded-full border border-[#eff0ea] dark:border-[#2a2c22] hover:border-brand-gold text-brand-gold transition-colors group">
-                        <Share2 className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                    <a href="https://www.facebook.com/share/16mvyfJibH/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 flex items-center justify-center rounded-full border border-[#eff0ea] dark:border-[#2a2c22] hover:border-brand-gold text-brand-gold transition-colors group">
+                        <Facebook className="w-5 h-5 group-hover:scale-110 transition-transform" />
                     </a>
-                    <a href="#" className="w-10 h-10 flex items-center justify-center rounded-full border border-[#eff0ea] dark:border-[#2a2c22] hover:border-brand-gold text-brand-gold transition-colors group">
-                        <Camera className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                    <a href="https://www.instagram.com/bhavaniboutique_?igsh=c3VteGNiZ2ZzZGEx" target="_blank" rel="noopener noreferrer" className="w-10 h-10 flex items-center justify-center rounded-full border border-[#eff0ea] dark:border-[#2a2c22] hover:border-brand-gold text-brand-gold transition-colors group">
+                        <Instagram className="w-5 h-5 group-hover:scale-110 transition-transform" />
                     </a>
-                    <a href="#" className="w-10 h-10 flex items-center justify-center rounded-full border border-[#eff0ea] dark:border-[#2a2c22] hover:border-brand-gold text-brand-gold transition-colors group">
+                    <a href="https://www.bhavaniboutiques.in" target="_blank" rel="noopener noreferrer" className="w-10 h-10 flex items-center justify-center rounded-full border border-[#eff0ea] dark:border-[#2a2c22] hover:border-brand-gold text-brand-gold transition-colors group">
                         <Globe className="w-5 h-5 group-hover:scale-110 transition-transform" />
                     </a>
                 </div>
