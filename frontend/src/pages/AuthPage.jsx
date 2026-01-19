@@ -50,7 +50,7 @@ const AuthPage = () => {
     }, [navigate]);
 
     return (
-        <main className="flex h-screen w-screen overflow-hidden bg-background-light relative">
+        <main className="flex min-h-screen lg:h-screen w-screen lg:overflow-hidden bg-background-light relative">
 
             {/* Left Side - Image & Branding */}
             <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden bg-primary">
@@ -61,9 +61,9 @@ const AuthPage = () => {
                     className="absolute inset-0 object-cover w-full h-full scale-105 hover:scale-100 transition-transform duration-1000"
                 />
                 <div className="relative z-20 flex flex-col justify-between p-12 pr-32 text-white h-full w-full">
-                    <div className="flex items-center space-x-0 gap-1.5">
-                        <img src={LogoWhite} alt="Bhavani Boutique Logo" className="h-20 w-auto" />
-                        <span className="font-display text-lg tracking-widest uppercase">Bhavani Boutique</span>
+                    <div className="flex items-center space-x-0 gap-1 -ml-6">
+                        <img src={LogoWhite} alt="Bhavani Boutique Logo" className="h-12 w-auto" />
+                        <span className="font-display text-xl tracking-widest uppercase">Bhavani Boutique</span>
                     </div>
                     <div>
                         <h1 className="font-display text-6xl leading-tight mb-6">Redefining <br /><span className="italic text-[gold]">Timeless</span> Style.</h1>
@@ -89,9 +89,9 @@ const AuthPage = () => {
             </div>
 
             {/* Right Side - Forms */}
-            <div className="w-full lg:w-1/2 flex flex-col bg-background-light/90 lg:bg-background-light relative z-10 h-full">
+            <div className="w-full lg:w-1/2 flex flex-col bg-background-light/90 lg:bg-background-light relative z-10 h-full lg:overflow-y-auto">
                 <header className="flex justify-between items-center p-6 lg:p-8 shrink-0">
-                    <div className="lg:hidden flex items-center space-x-3">
+                    <div className="lg:hidden flex items-center space-x-1">
                         <img src={bbLogo} alt="Logo" className="h-10 w-auto" />
                         <span className="font-display text-base tracking-widest uppercase">Bhavani Boutique</span>
                     </div>
