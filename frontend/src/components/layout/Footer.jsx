@@ -32,15 +32,14 @@ const Footer = () => {
                         <ul className="space-y-4 text-sm text-slate-500">
                             <li><Link className="hover:text-primary transition-colors" to="/contact">Contact Us</Link></li>
                             <li><Link className="hover:text-primary transition-colors" to="/about">About Us</Link></li>
-                            <li><a className="hover:text-primary transition-colors" href="#">Size Guide</a></li>
-                            <li><a className="hover:text-primary transition-colors" href="#">FAQs</a></li>
+                            <li><Link className="hover:text-primary transition-colors" to="/faqs">FAQs</Link></li>
                         </ul>
                     </div>
                     <div>
                         <h4 className="font-bold text-sm uppercase tracking-widest mb-6">Connect</h4>
                         <ul className="space-y-4 text-sm text-slate-500 mb-6">
-                            <li><a className="hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
-                            <li><a className="hover:text-primary transition-colors" href="#">Terms of Service</a></li>
+                            <li><Link className="hover:text-primary transition-colors" to="/privacy-policy">Privacy Policy</Link></li>
+                            <li><Link className="hover:text-primary transition-colors" to="/terms-of-service">Terms of Service</Link></li>
                         </ul>
                         <div className="flex gap-4 mb-6">
                             <a className="w-10 h-10 rounded-full border border-stone-200 flex items-center justify-center hover:bg-primary hover:text-white transition-all" href="https://www.bhavaniboutiques.in" target="_blank" rel="noopener noreferrer">

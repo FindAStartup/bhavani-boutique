@@ -22,11 +22,11 @@ const VisionarySection = () => {
                         </p>
                     </blockquote>
                     <div className="space-y-1">
-                        <h4 className="text-xl font-bold">Ananya Nair</h4>
+                        <h4 className="text-xl font-bold">Rejani Sreehari</h4>
                         <p className="text-primary font-medium">Founder & Creative Director</p>
                     </div>
                     <p className="text-base text-slate-600 font-light max-w-md">
-                        With over two decades of experience in high fashion and a deep-rooted love for her Keralite roots, Ananya founded Bhavana to empower local artisans and redefine ethical luxury.
+                        With over two decades of experience in high fashion and a deep-rooted love for her Keralite roots, Rejani founded Bhavani to empower local artisans and redefine ethical luxury.
                     </p>
                 </div>
             </div>

@@ -134,7 +134,6 @@ const ProductPreviewModal = ({ isOpen, onClose, productData }) => {
                                 <div>
                                     <div className="flex items-center justify-between mb-3">
                                         <h3 className="font-semibold text-slate-900">Select Size</h3>
-                                        <button className="text-sm text-primary hover:underline">Size Guide</button>
                                     </div>
                                     <div className="grid grid-cols-4 gap-2">
                                         {sizes.map((sizeObj) => (
@@ -143,10 +142,10 @@ const ProductPreviewModal = ({ isOpen, onClose, productData }) => {
                                                 onClick={() => sizeObj.available && setSelectedSize(sizeObj.size)}
                                                 disabled={!sizeObj.available}
                                                 className={`relative py-3 px-4 rounded-lg border-2 font-medium transition-all ${selectedSize === sizeObj.size
-                                                        ? 'border-primary bg-primary text-white'
-                                                        : sizeObj.available
-                                                            ? 'border-slate-300 hover:border-primary'
-                                                            : 'border-slate-200 bg-slate-50 text-slate-400 cursor-not-allowed'
+                                                    ? 'border-primary bg-primary text-white'
+                                                    : sizeObj.available
+                                                        ? 'border-slate-300 hover:border-primary'
+                                                        : 'border-slate-200 bg-slate-50 text-slate-400 cursor-not-allowed'
                                                     }`}
                                             >
                                                 <div className="text-center">

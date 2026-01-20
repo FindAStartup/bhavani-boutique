@@ -11,6 +11,9 @@ import CategoryProducts from './pages/CategoryProducts';
 import Wishlist from './pages/Wishlist';
 import AboutUs from './pages/AboutUs';
 import ContactUs from './pages/ContactUs';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
+import FAQ from './pages/FAQ';
 import AdminRoute from './components/auth/AdminRoute';
 import './App.css';
 
@@ -23,6 +26,9 @@ function App() {
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/contact" element={<ContactUs />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/terms-of-service" element={<TermsOfService />} />
+        <Route path="/faqs" element={<FAQ />} />
         <Route path="/login" element={<AuthPage />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
