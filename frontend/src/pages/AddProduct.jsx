@@ -6,7 +6,7 @@ import ImageUpload from '../components/admin/ImageUpload';
 import ProductPreviewModal from '../components/admin/ProductPreviewModal';
 import { Save, Eye, FileText } from 'lucide-react';
 
-const CATEGORIES = ['Corset', 'Saree', 'Kurties', 'Set Mund', 'Bottoms'];
+const CATEGORIES = ['Cordset', 'Saree', 'Kurties', 'Set Mund', 'Bottoms'];
 const SIZES = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 
 const AddProduct = () => {

@@ -47,7 +47,7 @@ create table if not exists public.products (
   name text not null,
   description text,
   price numeric(10, 2) not null,
-  category text check (category in ('Corset', 'Saree', 'Kurties', 'Set Mund', 'Bottoms')),
+  category text check (category in ('Cordset', 'Saree', 'Kurties', 'Set Mund', 'Bottoms')),
   images text[], -- Array of image URLs (4-5 images)
   material_care text, -- Care instructions
   sustainability_impact text, -- Sustainability information

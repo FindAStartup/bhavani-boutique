@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS public.products (
   name text NOT NULL,
   description text,
   price numeric(10, 2) NOT NULL,
-  category text CHECK (category IN ('Corset', 'Saree', 'Kurties', 'Set Mund', 'Bottoms')),
+  category text CHECK (category IN ('Cordset', 'Saree', 'Kurties', 'Set Mund', 'Bottoms')),
   images text[], -- Array of image URLs (4-5 images)
   material_care text, -- Care instructions
   sustainability_impact text, -- Sustainability information
@@ -105,3 +105,16 @@ SELECT column_name, data_type, is_nullable
 FROM information_schema.columns
 WHERE table_name = 'products'
 ORDER BY ordinal_position;
+
+-- ==========================================
+-- Data Migration (Run if you have existing data)
+-- ==========================================
+-- Update existing "Corset" products to "Cordset"
+UPDATE products 
+SET category = 'Cordset' 
+WHERE category = 'Corset';
+
+-- Verify no "Corset" items remain
+SELECT count(*) as remaining_corsets 
+FROM products 
+WHERE category = 'Corset';

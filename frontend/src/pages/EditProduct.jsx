@@ -5,7 +5,7 @@ import AdminHeader from '../components/admin/AdminHeader';
 import ImageUpload from '../components/admin/ImageUpload';
 import { Save, ArrowLeft } from 'lucide-react';
 
-const CATEGORIES = ['Corset', 'Saree', 'Kurties', 'Set Mund', 'Bottoms'];
+const CATEGORIES = ['Cordset', 'Saree', 'Kurties', 'Set Mund', 'Bottoms'];
 const SIZES = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 
 /**

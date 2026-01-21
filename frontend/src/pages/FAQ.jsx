@@ -120,7 +120,7 @@ const FAQ = () => {
             items: [
                 {
                     question: "Do you offer customization?",
-                    answer: "Yes! For select items (like Corset, Saree), we offer basic customization. Please contact us before placing your order to discuss your requirements."
+                    answer: "Yes! For select items (like Cordset, Saree), we offer basic customization. Please contact us before placing your order to discuss your requirements."
                 },
                 {
                     question: "How do I care for my garments?",

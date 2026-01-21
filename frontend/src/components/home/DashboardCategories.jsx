@@ -20,11 +20,11 @@ const DashboardCategories = () => {
 
                 <div className="flex-1 w-full overflow-hidden min-w-0">
                     <div className="flex items-center justify-between gap-4 md:gap-8 overflow-x-auto py-4 scrollbar-hide px-2 w-full">
-                        <Link to="/category/Corset" className="flex flex-col items-center gap-4 md:gap-5 group shrink-0 min-w-[100px] md:min-w-[120px]">
+                        <Link to="/category/Cordset" className="flex flex-col items-center gap-4 md:gap-5 group shrink-0 min-w-[100px] md:min-w-[120px]">
                             <div className="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden border-2 border-stone-100 group-hover:border-primary group-hover:shadow-lg transition-all duration-300 p-1 bg-white">
-                                <img alt="Corset" className="w-full h-full object-cover rounded-full group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbj-R4GVi2Ix5-byCkFHeV4gH0LIWL9WlZVuN2q4fgDc_daF4IM9Ks_23z5QGFF8onc8nxLie6rTln-CNSxLPAn_DhTruYpQZ2b3t-BQfhXDvXqFRpesUa_a8PfEpcxzKQb8i_L6y5H6B8j9bFxML7lIBFKMyqF7tkaImObfsPmzluEPB2XnNaApxg-mID_5SOdlI_zZqvYCs6QkpF-pcYwVN2zR99-_plyR_xW2j1v1P6JkHXKk_ircAGcruzFWMvgLmMyd4mPWIb" />
+                                <img alt="Cordset" className="w-full h-full object-cover rounded-full group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbj-R4GVi2Ix5-byCkFHeV4gH0LIWL9WlZVuN2q4fgDc_daF4IM9Ks_23z5QGFF8onc8nxLie6rTln-CNSxLPAn_DhTruYpQZ2b3t-BQfhXDvXqFRpesUa_a8PfEpcxzKQb8i_L6y5H6B8j9bFxML7lIBFKMyqF7tkaImObfsPmzluEPB2XnNaApxg-mID_5SOdlI_zZqvYCs6QkpF-pcYwVN2zR99-_plyR_xW2j1v1P6JkHXKk_ircAGcruzFWMvgLmMyd4mPWIb" />
                             </div>
-                            <span className="text-base font-bold uppercase tracking-widest text-slate-500 group-hover:text-primary transition-colors">Corset</span>
+                            <span className="text-base font-bold uppercase tracking-widest text-slate-500 group-hover:text-primary transition-colors">Cordset</span>
                         </Link>
                         <Link to="/category/Saree" className="flex flex-col items-center gap-4 md:gap-5 group shrink-0 min-w-[100px] md:min-w-[120px]">
                             <div className="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden border-2 border-stone-100 group-hover:border-primary group-hover:shadow-lg transition-all duration-300 p-1 bg-white">

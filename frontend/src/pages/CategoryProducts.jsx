@@ -16,7 +16,7 @@ const CategoryProducts = () => {
 
     // Category descriptions
     const categoryDescriptions = {
-        'Corset': '"Timeless elegance meets modern sophistication in our handcrafted corset collection."',
+        'Cordset': '"Timeless elegance meets modern sophistication in our handcrafted cordset collection."',
         'Saree': '"Drape yourself in tradition with our exquisite collection of handwoven sarees."',
         'Kurties': '"Contemporary comfort blended with traditional charm for the modern woman."',
         'Set Mund': '"Embodying the soul of Kerala—our Set Mund collection blends centuries of tradition with contemporary elegance."',
