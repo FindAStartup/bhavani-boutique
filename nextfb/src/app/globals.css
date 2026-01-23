@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  /* Brand Colors From Legacy Config */
+  --color-primary: #708238;
+  --color-brand-maroon: #550000;
+  --color-maroon: #550000;
+  --color-brand-gold: #FFD700;
+  --color-gold: #FFD700;
+  --color-background-light: #FFFFFF;
+  --color-background-dark: #121212;
+
+  /* Fonts */
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-playfair);
+  --font-newsreader: var(--font-newsreader);
+
+  /* Animations */
+  --animate-fade-in: fadeIn 0.8s ease-out forwards;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* Custom Utilities */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 10px;
+}
+
+/* Base Styles */
+body {
+  @apply font-sans text-slate-900 bg-background-light min-h-screen;
+}
