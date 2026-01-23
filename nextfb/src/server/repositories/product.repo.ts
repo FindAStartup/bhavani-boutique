@@ -1,6 +1,8 @@
-import { createClient } from '@/supabase/server'
+// 👇 1. Import createStaticClient here
+import { createClient, createStaticClient } from '@/supabase/server'
 
 export async function insertProduct(productData: any) {
+    // Write operations still use the normal client (auth required)
     const supabase = await createClient()
     return await supabase
         .from('products')
@@ -25,7 +27,9 @@ export async function deleteProductById(id: string) {
 }
 
 export async function findProducts(filters: { category?: string; is_draft?: boolean; search?: string; limit?: number } = {}) {
-    const supabase = await createClient()
+    // 👇 2. Use createStaticClient here so the Homepage can be Static
+    const supabase = await createStaticClient()
+
     const { category, is_draft, search, limit } = filters;
 
     let query = supabase
@@ -61,7 +65,9 @@ export async function findProducts(filters: { category?: string; is_draft?: bool
 }
 
 export async function findProductById(id: string) {
-    const supabase = await createClient()
+    // 👇 3. Use createStaticClient here too
+    const supabase = await createStaticClient()
+
     return await supabase
         .from('products')
         .select(`
