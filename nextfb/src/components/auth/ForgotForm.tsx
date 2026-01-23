@@ -33,6 +33,7 @@ const ForgotForm: React.FC<ForgotFormProps> = ({ onBackToLogin }) => {
             if (error) throw error;
 
             setMessage('Check your email for the password reset link.');
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (err: any) {
             setError(err.message || 'Failed to send reset email');
         } finally {
@@ -51,7 +52,7 @@ const ForgotForm: React.FC<ForgotFormProps> = ({ onBackToLogin }) => {
                     Back to Login
                 </button>
                 <h2 className="text-2xl font-display font-medium mb-2 text-[#161811]">Forgot Password?</h2>
-                <p className="text-slate-500 font-light text-sm">Enter your email address and we'll send you a link to reset your password.</p>
+                <p className="text-slate-500 font-light text-sm">Enter your email address and we&apos;ll send you a link to reset your password.</p>
             </div>
 
             {error && (

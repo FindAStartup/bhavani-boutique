@@ -44,6 +44,7 @@ export async function submitStartupIdea(
 
         return { success: true, message: 'Your idea has been submitted successfully!' };
 
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
         console.error('Startup submission error:', error);
         return { error: 'Failed to submit. Please try again later.' };

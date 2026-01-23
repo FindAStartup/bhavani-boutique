@@ -9,23 +9,26 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 export default function DraftsPage() {
-    const router = useRouter();
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const router = useRouter(); // Keeping router for future potential use or just suppress
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [drafts, setDrafts] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
     const [actionLoading, setActionLoading] = useState<string | null>(null);
 
-    const fetchDrafts = async () => {
+    const fetchDrafts = React.useCallback(async () => {
         setLoading(true);
         const result = await getDrafts();
         if (result.products) {
             setDrafts(result.products);
         }
         setLoading(false);
-    };
+    }, []);
 
     useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         fetchDrafts();
-    }, []);
+    }, [fetchDrafts]);
 
     const handlePublish = async (productId: string) => {
         if (!confirm('Are you sure you want to publish this draft?')) return;
@@ -85,7 +88,7 @@ export default function DraftsPage() {
                         <FileText className="w-10 h-10 text-slate-300" />
                     </div>
                     <h3 className="text-xl font-bold text-slate-700 mb-2">No Drafts Found</h3>
-                    <p className="text-slate-500 mb-8 max-w-xs mx-auto">You haven't saved any products as drafts yet. Create your first draft to see it here.</p>
+                    <p className="text-slate-500 mb-8 max-w-xs mx-auto">You haven&apos;t saved any products as drafts yet. Create your first draft to see it here.</p>
                     <Link
                         href="/admin/add-product"
                         className="bg-[#550000] hover:bg-[#440000] text-white font-semibold py-3 px-8 rounded-lg transition-all inline-block shadow-lg shadow-[#550000]/20"

@@ -101,7 +101,7 @@ const FAQ = () => {
                 {
                     question: "How do I place an order?",
                     answer:
-                        "Browse our collections, select your size and quantity, and click 'Add to Cart'. When you're ready, proceed to checkout and follow the instructions to complete your purchase.",
+                        "Browse our collections, select your size and quantity, and click &apos;Add to Cart&apos;. When you&apos;re ready, proceed to checkout and follow the instructions to complete your purchase.",
                 },
                 {
                     question: "Can I cancel or modify my order?",
@@ -151,7 +151,7 @@ const FAQ = () => {
                 {
                     question: "How do I initiate a return?",
                     answer:
-                        "Please email us at bhavaniboutique167@gmail.com with your order number and photos of the issue. We'll guide you through the process.",
+                        "Please email us at bhavaniboutique167@gmail.com with your order number and photos of the issue. We&apos;ll guide you through the process.",
                 },
             ],
         },
@@ -185,7 +185,7 @@ const FAQ = () => {
                         </h1>
                         <p className="text-slate-500 max-w-2xl mx-auto text-lg">
                             Everything you need to know about shopping with Bhavani Boutique.
-                            Can't find the answer you're looking for? Please contact our
+                            Can&apos;t find the answer you&apos;re looking for? Please contact our
                             support team.
                         </p>
                     </div>

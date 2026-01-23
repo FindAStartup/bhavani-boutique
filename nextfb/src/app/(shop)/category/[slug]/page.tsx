@@ -1,5 +1,4 @@
 import React from 'react';
-import { notFound } from 'next/navigation';
 import { getProducts } from '@/server/actions/product.actions';
 import CategoryHero from '@/components/product/CategoryHero';
 import ProductListing from '@/components/product/ProductListing';

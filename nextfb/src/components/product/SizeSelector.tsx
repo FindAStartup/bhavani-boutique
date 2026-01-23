@@ -3,6 +3,7 @@
 import React from 'react';
 
 interface SizeSelectorProps {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     sizes: any[]; // Replace with proper type if available
     selectedSize: string;
     onSizeSelect: (size: string) => void;

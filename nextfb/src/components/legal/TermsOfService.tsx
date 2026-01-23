@@ -28,7 +28,7 @@ const TermsOfService = () => {
                     <section>
                         <h2 className="text-xl font-bold text-slate-800 mb-4">2. Products and Services</h2>
                         <p>
-                            We make every effort to display our products (colors, images, and descriptions) as accurately as possible. However, we cannot guarantee that your device's display will accurately reflect the actual product. All products are subject to availability.
+                            We make every effort to display our products (colors, images, and descriptions) as accurately as possible. However, we cannot guarantee that your device&apos;s display will accurately reflect the actual product. All products are subject to availability.
                         </p>
                     </section>
 

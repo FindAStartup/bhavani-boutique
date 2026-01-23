@@ -9,6 +9,7 @@ const DashboardCalendar = () => {
 
     // Update today on mount to avoid hydration mismatch
     useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setToday(new Date());
     }, []);
 

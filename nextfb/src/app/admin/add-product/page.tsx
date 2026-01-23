@@ -41,49 +41,48 @@ function AddProduct() {
     const [stock, setStock] = useState<{ size: string; quantity: number }[]>([]);
     const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
     const [loading, setLoading] = useState(false);
-    const [initialFetchLoading, setInitialFetchLoading] = useState(false);
     const [showPreview, setShowPreview] = useState(false);
 
     useEffect(() => {
+        const fetchProductDetails = async () => {
+            if (!productId) return;
+            try {
+                const { data: product, error } = await supabase
+                    .from('products')
+                    .select(`*, product_stock(*)`)
+                    .eq('id', productId)
+                    .single();
+
+                if (error) throw error;
+
+                if (product) {
+                    setFormData({
+                        name: product.name,
+                        description: product.description || '',
+                        price: product.price.toString(),
+                        category: product.category,
+                        material_care: product.material_care || '',
+                        sustainability_impact: product.sustainability_impact || '',
+                        delivery_days: product.delivery_days.toString(),
+                    });
+                    setImages(product.images.map((url: string) => ({ url, isUploading: false })));
+
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    const sizes = product.product_stock.map((s: any) => s.size);
+                    setSelectedSizes(sizes);
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    setStock(product.product_stock.map((s: any) => ({ size: s.size, quantity: s.stock_quantity })));
+                }
+            } catch (error) {
+                console.error('Error fetching product details:', error);
+                alert('Failed to load product details for editing.');
+            }
+        };
+
         if (productId) {
             fetchProductDetails();
         }
-    }, [productId]);
-
-    const fetchProductDetails = async () => {
-        setInitialFetchLoading(true);
-        try {
-            const { data: product, error } = await supabase
-                .from('products')
-                .select(`*, product_stock(*)`)
-                .eq('id', productId)
-                .single();
-
-            if (error) throw error;
-
-            if (product) {
-                setFormData({
-                    name: product.name,
-                    description: product.description || '',
-                    price: product.price.toString(),
-                    category: product.category,
-                    material_care: product.material_care || '',
-                    sustainability_impact: product.sustainability_impact || '',
-                    delivery_days: product.delivery_days.toString(),
-                });
-                setImages(product.images.map((url: string) => ({ url, isUploading: false })));
-
-                const sizes = product.product_stock.map((s: any) => s.size);
-                setSelectedSizes(sizes);
-                setStock(product.product_stock.map((s: any) => ({ size: s.size, quantity: s.stock_quantity })));
-            }
-        } catch (error) {
-            console.error('Error fetching product details:', error);
-            alert('Failed to load product details for editing.');
-        } finally {
-            setInitialFetchLoading(false);
-        }
-    };
+    }, [productId, supabase]);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -160,6 +159,7 @@ function AddProduct() {
             } else {
                 throw new Error(result.error || 'Failed to create product');
             }
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
             console.error('Submit error:', error);
             alert(`❌ Error: ${error.message}`);

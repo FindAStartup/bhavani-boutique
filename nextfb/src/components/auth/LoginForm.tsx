@@ -3,8 +3,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@/supabase/client';
-import { Eye, EyeOff, Loader, Mail } from 'lucide-react';
-import { useAuth } from '@/lib/context/AuthContext';
+import { Eye, EyeOff, Loader } from 'lucide-react';
 import { getUserRole } from '@/server/actions/auth.actions';
 
 interface LoginFormProps {
@@ -19,7 +18,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ onForgotPassword }) => {
     const [error, setError] = useState<string | null>(null);
     const router = useRouter();
     const supabase = createClient();
-    const { signInWithGoogle } = useAuth(); // If we want to use the context method
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -44,18 +42,11 @@ const LoginForm: React.FC<LoginFormProps> = ({ onForgotPassword }) => {
             }
 
             router.refresh();
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (err: any) {
             setError(err.message || 'Failed to login');
         } finally {
             setLoading(false);
-        }
-    };
-
-    const handleGoogleLogin = async () => {
-        try {
-            await signInWithGoogle();
-        } catch (err: any) {
-            setError(err.message || 'Google login failed');
         }
     };
 

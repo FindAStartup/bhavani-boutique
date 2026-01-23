@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 
 interface ProductImageGalleryProps {
     images: string[];
@@ -33,23 +34,26 @@ const ProductImageGallery: React.FC<ProductImageGalleryProps> = ({ images, produ
                                 }`}
                             aria-label={`View image ${index + 1}`}
                         >
-                            <img
-                                src={img}
-                                alt={`${productName} view ${index + 1}`}
-                                className="w-full h-full object-cover"
-                                loading="lazy"
-                            />
+                            <div className="relative w-full h-full">
+                                <Image
+                                    src={img}
+                                    alt={`${productName} view ${index + 1}`}
+                                    fill
+                                    className="object-cover"
+                                />
+                            </div>
                         </button>
                     ))}
                 </div>
 
                 {/* Main Image Display */}
-                <div className="flex-1 aspect-square sm:aspect-[3/4] rounded-xl sm:rounded-2xl overflow-hidden border border-slate-200 shadow-lg">
-                    <img
+                <div className="flex-1 aspect-square sm:aspect-[3/4] rounded-xl sm:rounded-2xl overflow-hidden border border-slate-200 shadow-lg relative">
+                    <Image
                         src={images[selectedImage]}
                         alt={productName}
-                        className="w-full h-full object-cover"
-                        loading="eager"
+                        fill
+                        className="object-cover"
+                        priority
                     />
                 </div>
             </div>

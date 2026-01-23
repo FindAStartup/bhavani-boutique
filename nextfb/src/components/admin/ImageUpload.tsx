@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Upload, X, Image as ImageIcon, Loader2 } from 'lucide-react';
+import { Upload, X, Loader2 } from 'lucide-react';
 import { createClient } from '@/supabase/client';
 import Image from 'next/image';
 
@@ -33,8 +33,6 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ images, setImages, minImages 
                 continue;
             }
 
-            const tempId = Math.random().toString(36).substring(7);
-
             // Add temporary placeholder
             setImages(prev => [...prev, {
                 url: URL.createObjectURL(file), // Local preview
@@ -47,7 +45,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ images, setImages, minImages 
                 const fileName = `${Math.random()}.${fileExt}`;
                 const filePath = `products/${fileName}`;
 
-                const { error: uploadError, data } = await supabase.storage
+                const { error: uploadError } = await supabase.storage
                     .from('product-images') // Assuming this bucket exists
                     .upload(filePath, file);
 
@@ -63,6 +61,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ images, setImages, minImages 
                         ? { url: publicUrl, isUploading: false }
                         : img
                 ));
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
             } catch (error: any) {
                 console.error('Upload error:', error);
                 alert(`Failed to upload ${file.name}: ${error.message}`);

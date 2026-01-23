@@ -28,6 +28,7 @@ export async function findCartItem(userId: string, productId: string, size: stri
         .single();
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function insertCartItem(item: any) {
     const supabase = await createClient()
     return await supabase
@@ -35,6 +36,7 @@ export async function insertCartItem(item: any) {
         .insert(item);
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function updateCartItemById(id: string, updates: any) {
     const supabase = await createClient()
     return await supabase

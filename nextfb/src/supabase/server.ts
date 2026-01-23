@@ -41,8 +41,9 @@ export async function createStaticClient() {
                 getAll() {
                     return []
                 },
-                setAll(cookiesToSet) {
+                setAll(_cookiesToSet) {
                     // Do nothing
+                    void _cookiesToSet;
                 },
             },
         }

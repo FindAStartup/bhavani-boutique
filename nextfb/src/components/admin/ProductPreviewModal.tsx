@@ -1,14 +1,34 @@
 'use client';
 
 import React, { useState } from 'react';
-import { X, ShoppingBag, Zap, Truck, Leaf, Lock, ChevronDown, Minus, Plus } from 'lucide-react';
+import { X, ShoppingBag, Truck, Leaf, Lock, Plus } from 'lucide-react';
 import Image from 'next/image';
 
 interface PreviewModalProps {
     isOpen: boolean;
     onClose: () => void;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     productData: any;
 }
+
+const AccordionItem = ({ title, content, openSection, toggleSection }: { title: string, content: string, openSection: string | null, toggleSection: (section: string) => void }) => (
+    <div className="border-t border-slate-100">
+        <button
+            onClick={() => toggleSection(title)}
+            className="w-full py-4 flex items-center justify-between text-left group"
+        >
+            <span className="font-medium text-slate-800 group-hover:text-[#5d6b2e] transition-colors">{title}</span>
+            <Plus size={16} className={`text-slate-400 transition-transform duration-300 ${openSection === title ? 'rotate-45' : ''}`} />
+        </button>
+        <div
+            className={`overflow-hidden transition-all duration-300 ease-in-out ${openSection === title ? 'max-h-48' : 'max-h-0'}`}
+        >
+            <p className="pb-4 text-sm text-slate-600 leading-relaxed font-light">
+                {content || 'No details available.'}
+            </p>
+        </div>
+    </div>
+);
 
 const ProductPreviewModal: React.FC<PreviewModalProps> = ({ isOpen, onClose, productData }) => {
     const [openSection, setOpenSection] = useState<string | null>(null);
@@ -26,25 +46,6 @@ const ProductPreviewModal: React.FC<PreviewModalProps> = ({ isOpen, onClose, pro
     const toggleSection = (section: string) => {
         setOpenSection(openSection === section ? null : section);
     };
-
-    const AccordionItem = ({ title, content }: { title: string, content: string }) => (
-        <div className="border-t border-slate-100">
-            <button
-                onClick={() => toggleSection(title)}
-                className="w-full py-4 flex items-center justify-between text-left group"
-            >
-                <span className="font-medium text-slate-800 group-hover:text-[#5d6b2e] transition-colors">{title}</span>
-                <Plus size={16} className={`text-slate-400 transition-transform duration-300 ${openSection === title ? 'rotate-45' : ''}`} />
-            </button>
-            <div
-                className={`overflow-hidden transition-all duration-300 ease-in-out ${openSection === title ? 'max-h-48' : 'max-h-0'}`}
-            >
-                <p className="pb-4 text-sm text-slate-600 leading-relaxed font-light">
-                    {content || 'No details available.'}
-                </p>
-            </div>
-        </div>
-    );
 
     return (
         <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
@@ -158,14 +159,20 @@ const ProductPreviewModal: React.FC<PreviewModalProps> = ({ isOpen, onClose, pro
                                 <AccordionItem
                                     title="Material & Care"
                                     content={productData.material_care || 'Hand wash gently. Do not bleach.'}
+                                    openSection={openSection}
+                                    toggleSection={toggleSection}
                                 />
                                 <AccordionItem
                                     title="Shipping & Returns"
                                     content={`Delivery within ${productData.delivery_days || 7} days. Easy returns within 7 days of delivery.`}
+                                    openSection={openSection}
+                                    toggleSection={toggleSection}
                                 />
                                 <AccordionItem
                                     title="Sustainability Impact"
                                     content={productData.sustainability_impact || 'This product is made using sustainable practices.'}
+                                    openSection={openSection}
+                                    toggleSection={toggleSection}
                                 />
                             </div>
                         </div>

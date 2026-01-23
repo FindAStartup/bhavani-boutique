@@ -3,6 +3,7 @@
 import { createClient } from '@/supabase/server';
 import { revalidatePath } from 'next/cache';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function upsertProduct(productData: any) {
     const supabase = await createClient();
     const { id, stock, ...productFields } = productData;
@@ -41,6 +42,7 @@ export async function upsertProduct(productData: any) {
             if (deleteStockError) throw deleteStockError;
 
             // Insert new stock
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const stockToInsert = stock.map((s: any) => ({
                 product_id: productId,
                 size: s.size,
@@ -60,6 +62,7 @@ export async function upsertProduct(productData: any) {
         revalidatePath('/');
 
         return { success: true, productId };
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
         console.error('Error upserting product:', error);
         return { error: error.message };
@@ -111,6 +114,7 @@ export async function deleteProduct(productId: string) {
         revalidatePath('/');
 
         return { success: true };
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
         console.error('Error deleting product:', error);
         return { error: error.message };
@@ -134,6 +138,7 @@ export async function publishProduct(productId: string) {
         revalidatePath('/');
 
         return { success: true };
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
         console.error('Error publishing product:', error);
         return { error: error.message };

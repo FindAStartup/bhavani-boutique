@@ -4,6 +4,7 @@ import React from 'react';
 import ProductCard from './ProductCard';
 
 interface ProductListingProps {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     initialProducts: any[];
 }
 

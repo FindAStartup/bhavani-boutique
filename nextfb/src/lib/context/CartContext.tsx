@@ -6,6 +6,7 @@ import { useAuth } from './AuthContext';
 import { getCart, addToCart as addToCartAction, updateCartItem as updateCartItemAction, removeCartItem as removeCartItemAction } from '@/server/actions/cart.actions';
 
 interface CartContextType {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     cartItems: any[];
     cartCount: number;
     loading: boolean;
@@ -19,11 +20,12 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     const { user, loading: authLoading } = useAuth();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [cartItems, setCartItems] = useState<any[]>([]);
     const [loading, setLoading] = useState(false);
     const router = useRouter();
 
-    const fetchCart = async () => {
+    const fetchCart = React.useCallback(async () => {
         if (!user) {
             setCartItems([]);
             return;
@@ -34,13 +36,14 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
             setCartItems(items);
         }
         setLoading(false);
-    };
+    }, [user]);
 
     useEffect(() => {
         if (!authLoading) {
+            // eslint-disable-next-line react-hooks/set-state-in-effect
             fetchCart();
         }
-    }, [user, authLoading]);
+    }, [user, authLoading, fetchCart]);
 
     const addItem = async (productId: string, quantity: number, size: string) => {
         if (!user) {

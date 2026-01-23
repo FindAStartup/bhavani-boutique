@@ -1,6 +1,7 @@
 // 👇 1. Import createStaticClient here
 import { createClient, createStaticClient } from '@/supabase/server'
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function insertProduct(productData: any) {
     // Write operations still use the normal client (auth required)
     const supabase = await createClient()
@@ -11,6 +12,7 @@ export async function insertProduct(productData: any) {
         .single();
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function insertProductStock(stockEntries: any[]) {
     const supabase = await createClient()
     return await supabase
@@ -81,6 +83,7 @@ export async function findProductById(id: string) {
         .single();
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function updateProductById(id: string, productData: any) {
     const supabase = await createClient()
     return await supabase

@@ -32,7 +32,7 @@ const CartPage = () => {
                     <ShoppingBag className="w-10 h-10 text-slate-300" />
                 </div>
                 <h1 className="text-2xl font-bold text-slate-800 mb-2">Your cart is empty</h1>
-                <p className="text-slate-500 mb-8">Looks like you haven't added anything to your cart yet.</p>
+                <p className="text-slate-500 mb-8">Looks like you haven&apos;t added anything to your cart yet.</p>
                 <Link href="/" className="bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-lg font-semibold transition-colors">
                     Start Shopping
                 </Link>

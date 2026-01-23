@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import { createClient } from '@/supabase/client';
 import { Eye, EyeOff, Loader, CheckCircle } from 'lucide-react';
-import { useAuth } from '@/lib/context/AuthContext';
 
 const SignupForm = () => {
     const [firstName, setFirstName] = useState('');
@@ -18,7 +17,6 @@ const SignupForm = () => {
     const [success, setSuccess] = useState(false);
 
     const supabase = createClient();
-    const { signInWithGoogle } = useAuth();
 
     const handleSignup = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -47,18 +45,12 @@ const SignupForm = () => {
             if (signUpError) throw signUpError;
 
             setSuccess(true);
+            setSuccess(true);
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (err: any) {
             setError(err.message || 'Failed to create account');
         } finally {
             setLoading(false);
-        }
-    };
-
-    const handleGoogleSignup = async () => {
-        try {
-            await signInWithGoogle();
-        } catch (err: any) {
-            setError(err.message || 'Google signup failed');
         }
     };
 
@@ -70,7 +62,7 @@ const SignupForm = () => {
                 </div>
                 <h2 className="text-2xl font-display font-medium mb-3 text-[#161811]">Check your email</h2>
                 <p className="text-slate-500 mb-6 leading-relaxed">
-                    We've sent a verification link to <span className="font-semibold text-slate-800">{email}</span>. Please check your inbox to confirm your account.
+                    We&apos;ve sent a verification link to <span className="font-semibold text-slate-800">{email}</span>. Please check your inbox to confirm your account.
                 </p>
                 <button
                     onClick={() => setSuccess(false)}

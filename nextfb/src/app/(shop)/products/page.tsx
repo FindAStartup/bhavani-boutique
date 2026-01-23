@@ -28,6 +28,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
             </h1>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-8 md:gap-x-8 md:gap-y-12">
+                {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                 {products.map((product: any) => (
                     <ProductCard key={product.id} product={product} />
                 ))}

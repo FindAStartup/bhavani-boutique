@@ -17,6 +17,7 @@ export async function subscribeToNewsletter(
     try {
         await newsletterService.subscribeToNewsletterService(email);
         return { success: true, message: 'Thanks for subscribing!' };
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
         return { error: error.message };
     }

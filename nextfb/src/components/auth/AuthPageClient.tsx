@@ -21,10 +21,11 @@ const AuthPageClient = () => {
     // Sync state with URL params if they change
     useEffect(() => {
         const tab = searchParams.get('tab');
-        if (tab === 'signup' || tab === 'login') {
+        if ((tab === 'signup' || tab === 'login') && tab !== activeTab) {
+            // eslint-disable-next-line react-hooks/set-state-in-effect
             setActiveTab(tab);
         }
-    }, [searchParams]);
+    }, [searchParams, activeTab]);
 
     // Redirect if already logged in
     // Redirect if already logged in

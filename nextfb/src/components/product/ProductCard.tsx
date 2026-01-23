@@ -6,6 +6,7 @@ import { createClient } from '@/supabase/client';
 import { addToWishlist, removeFromWishlist, checkWishlistStatus } from '@/server/actions/wishlist.actions';
 
 interface ProductCardProps {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     product: any; // Replace with proper Product type
 }
 

@@ -1,5 +1,6 @@
 import * as productRepo from '../repositories/product.repo'
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function createProductService(formData: any) {
     const {
         name,
@@ -37,6 +38,7 @@ export async function createProductService(formData: any) {
     if (productError) throw productError;
 
     if (stock && stock.length > 0) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const stockEntries = stock.map((item: any) => ({
             product_id: product.id,
             size: item.size,
@@ -54,6 +56,7 @@ export async function createProductService(formData: any) {
     return product;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function getProductsService(filters: any = {}) {
     const { data: products, error } = await productRepo.findProducts(filters);
     if (error) throw error;
@@ -66,6 +69,7 @@ export async function getProductByIdService(id: string) {
     return product;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function updateProductService(id: string, formData: any) {
     const {
         name,
@@ -97,6 +101,7 @@ export async function updateProductService(id: string, formData: any) {
 
     if (stock && stock.length > 0) {
         await productRepo.deleteProductStockByProductId(id);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const stockEntries = stock.map((item: any) => ({
             product_id: id,
             size: item.size,

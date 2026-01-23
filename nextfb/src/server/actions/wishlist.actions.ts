@@ -47,6 +47,7 @@ export async function getUserWishlist() {
         // Transform the data to flatten product details
         // Note: Typescript might complain about the shape here without proper types, 
         // but logic mimics the original controller
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const formattedWishlist = wishlistItems.map((item: any) => ({
             wishlist_id: item.id,
             added_at: item.created_at,

@@ -27,6 +27,7 @@ const Header = () => {
     const { cartCount } = useCart();
     const [isSearchFocused, setIsSearchFocused] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [suggestions, setSuggestions] = useState<any[]>([]);
     const router = useRouter();
 
@@ -40,7 +41,6 @@ const Header = () => {
     // Debounce search suggestions
     useEffect(() => {
         if (searchQuery.length < 2) {
-            setSuggestions([]);
             return;
         }
 
@@ -55,6 +55,28 @@ const Header = () => {
     }, [searchQuery]);
     const pathname = usePathname();
     const supabase = createClient();
+
+    // Define fetchWishlistCount before effects that use it
+    const fetchWishlistCount = React.useCallback(async () => {
+        // We'll use a direct Supabase query here instead of a fetch to an API route for efficiency in client component
+        // or we could call the server action if we were passing it down.
+        // For now, let's keep it consistent with the Supabase client availability
+        try {
+            const { data: { user } } = await supabase.auth.getUser();
+            if (!user) return;
+
+            const { count, error } = await supabase
+                .from('wishlists')
+                .select('*', { count: 'exact', head: true })
+                .eq('user_id', user.id);
+
+            if (!error && count !== null) {
+                setWishlistCount(count);
+            }
+        } catch (error) {
+            console.error('Error fetching wishlist count:', error);
+        }
+    }, [supabase]);
 
     useEffect(() => {
         supabase.auth.getSession().then(({ data: { session } }) => {
@@ -85,28 +107,7 @@ const Header = () => {
             subscription.unsubscribe();
             window.removeEventListener('wishlistUpdated', handleWishlistUpdate);
         };
-    }, [supabase]);
-
-    const fetchWishlistCount = async () => {
-        // We'll use a direct Supabase query here instead of a fetch to an API route for efficiency in client component
-        // or we could call the server action if we were passing it down.
-        // For now, let's keep it consistent with the Supabase client availability
-        try {
-            const { data: { user } } = await supabase.auth.getUser();
-            if (!user) return;
-
-            const { count, error } = await supabase
-                .from('wishlists')
-                .select('*', { count: 'exact', head: true })
-                .eq('user_id', user.id);
-
-            if (!error && count !== null) {
-                setWishlistCount(count);
-            }
-        } catch (error) {
-            console.error('Error fetching wishlist count:', error);
-        }
-    };
+    }, [supabase, fetchWishlistCount]);
 
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -178,7 +179,12 @@ const Header = () => {
                                 placeholder="Search designs..."
                                 type="text"
                                 value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
+                                onChange={(e) => {
+                                    setSearchQuery(e.target.value);
+                                    if (e.target.value.length < 2) {
+                                        setSuggestions([]);
+                                    }
+                                }}
                                 onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
                                 onFocus={() => setIsSearchFocused(true)}
                                 onBlur={() => {

@@ -11,7 +11,9 @@ const BoutiqueFavorites = async () => {
     }
 
     // Sort by created_at descending (newest first) and take top 8
+    // Sort by created_at descending (newest first) and take top 8
     const latestProducts = [...products]
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         .sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
         .slice(0, 8);
 
@@ -29,6 +31,7 @@ const BoutiqueFavorites = async () => {
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-8 lg:gap-x-8 lg:gap-y-12">
+                {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                 {latestProducts.map((product: any) => (
                     <ProductCard key={product.id} product={product} />
                 ))}
