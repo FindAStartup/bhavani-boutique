@@ -26,7 +26,7 @@ const DashboardCategories = () => {
                                 <Image
                                     alt="Cordset"
                                     className="object-cover rounded-full group-hover:scale-105 transition-transform duration-500"
-                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbj-R4GVi2Ix5-byCkFHeV4gH0LIWL9WlZVuN2q4fgDc_daF4IM9Ks_23z5QGFF8onc8nxLie6rTln-CNSxLPAn_DhTruYpQZ2b3t-BQfhXDvXqFRpesUa_a8PfEpcxzKQb8i_L6y5H6B8j9bFxML7lIBFKMyqF7tkaImObfsPmzluEPB2XnNaApxg-mID_5SOdlI_zZqvYCs6QkpF-pcYwVN2zR99-_plyR_xW2j1v1P6JkHXKk_ircAGcruzFWMvgLmMyd4mPWIb"
+                                    src="/Cordset.jpeg"
                                     fill
                                     sizes="(max-width: 768px) 80px, 96px"
                                 />
@@ -38,7 +38,7 @@ const DashboardCategories = () => {
                                 <Image
                                     alt="Saree"
                                     className="object-cover rounded-full group-hover:scale-105 transition-transform duration-500"
-                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBn2LwJwUA6IltadXBA3cOpxQL-E78tatSmhgU8XolUfx0NF5VTfPOecpuQzMFUsTq4MfzbKcFTbJlE5MqqGcBn-dCheDEOpQVLD8MLDZ5YNq0nDjFHPupir6gE9Q5_hc0sPbwnySfs2I44oL0s8YG_WZNLfu0Uf8XJZBwocTMrzKL4ekE6efKM1NkOkbX3mR32ArRJXU_7UIjCRbLeHvp_uHHcHOzRp1zmKTjzeSGrPDC_0GUvITKLstd9bEn0zM8M5WKIvjkPQ0i6"
+                                    src="/Saree.jpeg"
                                     fill
                                     sizes="(max-width: 768px) 80px, 96px"
                                 />
@@ -50,7 +50,7 @@ const DashboardCategories = () => {
                                 <Image
                                     alt="Kurties"
                                     className="object-cover rounded-full group-hover:scale-105 transition-transform duration-500"
-                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5enm3e40HMbFdXqFZsTtO8B3ogWTuiadBwW4EKN36ui0YKrwAudiqC53kXy0dW_iM4Q55BO0UoKAy3r6ui_j9oDbdmXmu-KVcBGkQnCAQB8cay-sgZNJ--GbpcUlUpJzdtv90SoIVJDq94Mcxf6HQMMxa9ECd9azCu9faNjgqnRhTTixVEeD_HC4XGYh5Q-JOowEw02acpAJeREMdoIM6ASExeT9Y7KCICQIWZEmG7TJROPDJF2tcp5RypdlSE8MeJFjBmdSuA8ot"
+                                    src="/Kurties.jpeg"
                                     fill
                                     sizes="(max-width: 768px) 80px, 96px"
                                 />
@@ -62,7 +62,7 @@ const DashboardCategories = () => {
                                 <Image
                                     alt="Set Mund"
                                     className="object-cover rounded-full group-hover:scale-105 transition-transform duration-500"
-                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCujVkaU5VBNIfWP7W-FJTKV5pJuXC6XlC0qSwAPw-wuN0BEiMGCJl96XccnTEeWN9UZg1JO-CTGdBgZg_48kvH6uI2Cj_nNgaQ4Vv_O-s5H7u0g9z1pzDqimmFHalMjz3jL7BFZLLz782_pw-IQe4kanfG9B4M7gO5czIW60ebaQqCmWW15j3RD0rPpheEVo1uhbjKu_bbQ-z9BllbFQKy99AfYkYu-8X6KAVXzoGJSkb7VFBTMpgw_Gao1otFcUvrstIcCT2vrt-S"
+                                    src="/SetMundu.jpeg"
                                     fill
                                     sizes="(max-width: 768px) 80px, 96px"
                                 />
@@ -74,7 +74,7 @@ const DashboardCategories = () => {
                                 <Image
                                     alt="Bottoms"
                                     className="object-cover rounded-full group-hover:scale-105 transition-transform duration-500"
-                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNH1JAMSZLWW_8WViyGwz-By_GhliuZ7_vy7QzwDdIrQeRuxHxKu2QwEM6eQXCtDkMiHvch2tgqPeO0StFIoeqHsQfbpUWUnUpaSHvTHNc3T4_NFVjGLwfOcjcvUjia9cRAUtJvj5k1_sB_x6VTdv4wpSoRgRB4qRQCVJEIRuiqbofGaHcyFpq3p2HJJQSzZacUtUXAxkCMZQRo0mXZcyUJFRh0hgv6EM2ds16o8goe8sGXS2uHpzktHNIQgrd7s3k9T1x9VYhrWrL"
+                                    src="/Bottoms.jpeg"
                                     fill
                                     sizes="(max-width: 768px) 80px, 96px"
                                 />
