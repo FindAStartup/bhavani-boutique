@@ -9,7 +9,8 @@ import {
     FileText,
     LogOut,
     X,
-    User
+    User,
+    Package
 } from 'lucide-react';
 import { createClient } from '@/supabase/client';
 
@@ -60,6 +61,7 @@ const AdminSidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
     const navItems = [
         { name: 'Home', path: '/admin', icon: <LayoutDashboard size={20} /> },
         { name: 'Add Product', path: '/admin/add-product', icon: <PlusCircle size={20} /> },
+        { name: 'Products', path: '/admin/products', icon: <Package size={20} /> },
         { name: 'Drafts', path: '/admin/drafts', icon: <FileText size={20} /> },
     ];
 

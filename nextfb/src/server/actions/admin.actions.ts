@@ -58,6 +58,7 @@ export async function upsertProduct(productData: any) {
 
         revalidatePath('/admin');
         revalidatePath('/admin/drafts');
+        revalidatePath('/admin/products');
         revalidatePath(`/product/${productId}`);
         revalidatePath('/');
 
@@ -89,12 +90,34 @@ export async function getDrafts() {
     return { products };
 }
 
+export async function getPublishedProducts() {
+    const supabase = await createClient();
+
+    const { data: products, error } = await supabase
+        .from('products')
+        .select(`
+            *,
+            product_stock (*)
+        `)
+        .eq('is_draft', false)
+        .order('created_at', { ascending: false });
+
+    if (error) {
+        console.error('Error fetching published products:', error);
+        return { error: error.message };
+    }
+
+    return { products };
+}
+
 export async function deleteProduct(productId: string) {
     const supabase = await createClient();
 
     try {
         // Table relationships should handle stock deletion if cascade is set, 
-        // but let's be explicit if not sure.
+        // but let's be explicit to avoid FK errors.
+
+        // 1. Delete Stock
         const { error: stockError } = await supabase
             .from('product_stock')
             .delete()
@@ -102,6 +125,7 @@ export async function deleteProduct(productId: string) {
 
         if (stockError) throw stockError;
 
+        // 2. Delete Product
         const { error: productError } = await supabase
             .from('products')
             .delete()
@@ -111,6 +135,7 @@ export async function deleteProduct(productId: string) {
 
         revalidatePath('/admin');
         revalidatePath('/admin/drafts');
+        revalidatePath('/admin/products');
         revalidatePath('/');
 
         return { success: true };
@@ -134,6 +159,7 @@ export async function publishProduct(productId: string) {
 
         revalidatePath('/admin');
         revalidatePath('/admin/drafts');
+        revalidatePath('/admin/products');
         revalidatePath(`/product/${productId}`);
         revalidatePath('/');
 

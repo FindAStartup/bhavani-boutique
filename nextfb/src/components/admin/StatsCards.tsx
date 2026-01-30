@@ -6,7 +6,7 @@ const StatsCards = () => {
     const cards = [
         {
             title: 'Total Sales',
-            value: '₹1,24,500',
+            value: '₹ 0',
             icon: <IndianRupee size={40} className="text-[#FFD700]" />,
             color: 'gold',
             trendIcon: <TrendingUp size={16} className="mr-1" />,
@@ -14,7 +14,7 @@ const StatsCards = () => {
         },
         {
             title: 'Total Orders',
-            value: '156',
+            value: '0',
             icon: <ShoppingCart size={40} className="text-[#550000]" />,
             color: 'primary',
             trendIcon: <TrendingUp size={16} className="mr-1" />,
@@ -22,7 +22,7 @@ const StatsCards = () => {
         },
         {
             title: 'Stock Alerts',
-            value: '12 Items',
+            value: '0 Items',
             icon: <Archive size={40} className="text-red-700" />,
             color: 'maroon',
             trendIcon: <AlertTriangle size={16} className="mr-1" />,

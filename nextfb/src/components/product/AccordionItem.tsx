@@ -5,7 +5,7 @@ import { ChevronDown, LucideIcon } from 'lucide-react';
 
 interface AccordionItemProps {
     title: string;
-    content: string;
+    content: React.ReactNode;
     section: string;
     isExpanded: boolean;
     onToggle: (section: string) => void;
@@ -36,9 +36,9 @@ const AccordionItem: React.FC<AccordionItemProps> = ({ title, content, section, 
                 className={`overflow-hidden transition-all duration-300 ${isExpanded ? 'max-h-96 pb-4' : 'max-h-0'
                     }`}
             >
-                <p className="text-slate-600 text-sm leading-relaxed whitespace-pre-line">
+                <div className="text-slate-600 text-sm leading-relaxed">
                     {content}
-                </p>
+                </div>
             </div>
         </div>
     );

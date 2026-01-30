@@ -76,4 +76,19 @@ export async function deleteProduct(id: string) {
     }
 }
 
+export async function getRelatedProducts(category: string, currentProductId: string) {
+    try {
+        const products = await productService.getProductsService({
+            category,
+            excludeId: currentProductId,
+            limit: 4
+        });
+        return { products };
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+        console.error('Get related products error:', error);
+        return { error: error.message };
+    }
+}
+
 

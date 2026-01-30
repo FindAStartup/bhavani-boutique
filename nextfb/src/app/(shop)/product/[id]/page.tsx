@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { getProductById } from '@/server/actions/product.actions';
 import ProductDetailsClient from '@/components/product/ProductDetailsClient';
+import RelatedProducts from '@/components/product/RelatedProducts';
 
 interface PageProps {
     params: Promise<{
@@ -39,5 +40,9 @@ export default async function ProductPage({ params }: PageProps) {
         return notFound();
     }
 
-    return <ProductDetailsClient product={product} />;
+    return (
+        <ProductDetailsClient product={product}>
+            <RelatedProducts category={product.category} currentProductId={product.id} />
+        </ProductDetailsClient>
+    );
 }

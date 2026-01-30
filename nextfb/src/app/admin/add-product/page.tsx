@@ -63,7 +63,7 @@ function AddProduct() {
                         category: product.category,
                         material_care: product.material_care || '',
                         sustainability_impact: product.sustainability_impact || '',
-                        delivery_days: product.delivery_days.toString(),
+                        delivery_days: (product.delivery_days || 7).toString(), // Default to 7 if null
                     });
                     setImages(product.images.map((url: string) => ({ url, isUploading: false })));
 

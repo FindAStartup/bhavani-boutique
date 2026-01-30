@@ -12,15 +12,18 @@ import AccordionItem from './AccordionItem';
 import TrustBadges from './TrustBadges';
 
 import { useCart } from '@/lib/context/CartContext';
+import { useAuth } from '@/lib/context/AuthContext';
 
 interface ProductDetailsClientProps {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     product: any;
+    children?: React.ReactNode;
 }
 
-const ProductDetailsClient: React.FC<ProductDetailsClientProps> = ({ product }) => {
+const ProductDetailsClient: React.FC<ProductDetailsClientProps> = ({ product, children }) => {
     const router = useRouter();
     const { addItem } = useCart();
+    const { user } = useAuth();
     const [selectedImage, setSelectedImage] = useState(0);
     const [selectedSize, setSelectedSize] = useState('');
     const [quantity, setQuantity] = useState(1);
@@ -47,6 +50,11 @@ const ProductDetailsClient: React.FC<ProductDetailsClientProps> = ({ product }) 
     };
 
     const handleAddToCart = async () => {
+        if (!user) {
+            router.push('/login');
+            return;
+        }
+
         if (!selectedSize) {
             alert('Please select a size');
             return;
@@ -55,6 +63,11 @@ const ProductDetailsClient: React.FC<ProductDetailsClientProps> = ({ product }) 
     };
 
     const handleBuyNow = async () => {
+        if (!user) {
+            router.push('/login');
+            return;
+        }
+
         if (!selectedSize) {
             alert('Please select a size');
             return;
@@ -195,7 +208,15 @@ const ProductDetailsClient: React.FC<ProductDetailsClientProps> = ({ product }) 
                             )}
                             <AccordionItem
                                 title="Shipping & Returns"
-                                content="Free shipping on orders over ₹2000. Returns accepted within 30 days of purchase. Items must be unworn and in original condition with tags attached."
+                                content={
+                                    <span>
+                                        Shipping is completely free on all orders. For returns, please contact{' '}
+                                        <span className="font-bold text-[#808000]">
+                                            bhavaniboutique167@gmail.com
+                                        </span>{' '}
+                                        within 2 days of purchase (whether bought from shop or online).
+                                    </span>
+                                }
                                 section="shipping"
                                 isExpanded={expandedSection === 'shipping'}
                                 onToggle={setExpandedSection}
@@ -216,15 +237,9 @@ const ProductDetailsClient: React.FC<ProductDetailsClientProps> = ({ product }) 
                     </section>
                 </article>
 
-                {/* Related Products Placeholder - Can be enhanced later */}
-                <section className="mt-12 sm:mt-16" aria-labelledby="related-products-heading">
-                    <h2 id="related-products-heading" className="text-xl sm:text-2xl font-display font-bold text-slate-900 mb-6">
-                        You May Also Like
-                    </h2>
-                    <div className="text-center text-slate-500 py-12 border border-dashed border-slate-300 rounded-lg">
-                        <p className="text-sm sm:text-base">Related products will appear here</p>
-                    </div>
-                </section>
+                {/* Related Products Section */}
+                {children}
+
             </main>
         </div>
     );
