@@ -188,7 +188,7 @@ const ProductDetailsClient: React.FC<ProductDetailsClientProps> = ({ product, ch
                                             Estimated delivery in {product.delivery_days} days
                                         </p>
                                         <p className="text-xs text-slate-600 mt-0.5">
-                                            Free shipping on orders above ₹2000
+                                            Free shipping
                                         </p>
                                     </div>
                                 </div>
