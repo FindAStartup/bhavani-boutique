@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { createClient } from '@/supabase/client';
 import { Eye, EyeOff, Loader, CheckCircle, ArrowRight, ArrowLeft } from 'lucide-react';
-import { checkEmailAvailability } from '@/actions/auth';
+import { isValidEmail, isValidSignupPhone } from '@/lib/auth-validation';
 
 const SignupForm = () => {
     // Step state: 1 = Personal Details & Email, 2 = Password & Terms
@@ -25,46 +25,33 @@ const SignupForm = () => {
 
     const supabase = createClient();
 
-    const handleDetailsCheck = async (e: React.FormEvent) => {
+    const validateDetails = () => {
+        if (!firstName.trim() || !lastName.trim()) return 'Enter your first and last name.';
+        if (!isValidSignupPhone(phone)) return 'Enter a phone number with exactly 10 digits.';
+        if (!isValidEmail(email.trim())) return 'Enter a valid email address.';
+        return null;
+    };
+
+    const handleDetailsCheck = (e: React.FormEvent) => {
         e.preventDefault();
-        setError(null);
-
-        // Basic validation
-        if (!firstName || !lastName || !email) {
-            setError('Please fill in all required fields.');
-            return;
-        }
-
-        // Check if email ends with .com
-        if (!email.toLowerCase().endsWith('.com')) {
-            setError('Email must end with .com');
-            return;
-        }
-
-        setLoading(true);
-
-        try {
-            // Check availability via Server Action (Checks Supabase Auth Users)
-            const result = await checkEmailAvailability(email);
-
-            if (!result.available) {
-                setError(result.message || 'This email cannot be used.');
-                setLoading(false);
-                return;
-            }
-
-            // If valid and available, proceed to step 2 (Password)
+        const error = validateDetails();
+        setError(error);
+        if (!error) {
+            setEmail(email.trim());
             setStep(2);
-        } catch (err) {
-            console.error(err);
-            setError('Something went wrong. Please try again.');
-        } finally {
-            setLoading(false);
         }
     };
 
+
     const handleSignup = async (e: React.FormEvent) => {
         e.preventDefault();
+
+        const detailsError = validateDetails();
+        if (detailsError) {
+            setError(detailsError);
+            setStep(1);
+            return;
+        }
 
         if (!agreedToTerms) {
             setError('You must agree to the Terms of Service and Privacy Policy.');
@@ -76,12 +63,12 @@ const SignupForm = () => {
 
         try {
             const { error: signUpError } = await supabase.auth.signUp({
-                email,
+                email: email.trim(),
                 password,
                 options: {
                     data: {
                         full_name: `${firstName} ${lastName}`.trim(),
-                        phone: phone,
+                        phone,
                         role: 'customer'
                     }
                 }
@@ -89,7 +76,6 @@ const SignupForm = () => {
 
             if (signUpError) throw signUpError;
 
-            setSuccess(true);
             setSuccess(true);
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (err: any) {
@@ -144,7 +130,7 @@ const SignupForm = () => {
             )}
 
             {step === 1 ? (
-                // STEP 1: Personal Details & Email Check
+                // STEP 1: Personal details
                 <form onSubmit={handleDetailsCheck} className="space-y-5 animate-in slide-in-from-left-4 fade-in duration-300">
                     <div className="grid grid-cols-2 gap-4">
                         <div className="space-y-1.5">
@@ -176,24 +162,32 @@ const SignupForm = () => {
                         <label className="text-xs font-bold uppercase tracking-wider text-slate-500 font-sans">Phone Number</label>
                         <input
                             type="tel"
+                            inputMode="numeric"
+                            autoComplete="tel-national"
+                            pattern="[0-9]{10}"
+                            required
                             value={phone}
                             onChange={(e) => setPhone(e.target.value)}
                             className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg text-sm outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-[#161811] placeholder:text-slate-300"
-                            placeholder="+91 98765 43210"
+                            placeholder="9876543210"
+                            aria-describedby="signup-phone-help"
                         />
+                        <p id="signup-phone-help" className="text-xs text-slate-500">Enter 10 digits without a country code or spaces.</p>
                     </div>
 
                     <div className="space-y-1.5">
                         <label className="text-xs font-bold uppercase tracking-wider text-slate-500 font-sans">Email Address</label>
                         <input
                             type="email"
+                            autoComplete="email"
+                            maxLength={254}
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg text-sm outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-[#161811] placeholder:text-slate-300"
                             placeholder="alex@example.com"
                             required
                         />
-                        <p className="text-xs text-slate-400">Must be a valid .com email address</p>
+                        <p className="text-xs text-slate-400">Use an email address you can access.</p>
                     </div>
 
                     <button
@@ -285,3 +279,4 @@ const SignupForm = () => {
 };
 
 export default SignupForm;
+

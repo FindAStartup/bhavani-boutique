@@ -47,7 +47,7 @@ const ProductImageGallery: React.FC<ProductImageGalleryProps> = ({ images, produ
                 </div>
 
                 {/* Main Image Display */}
-                <div className="flex-1 aspect-square sm:aspect-[3/4] rounded-xl sm:rounded-2xl overflow-hidden border border-slate-200 shadow-lg relative">
+                <div className="flex-1 aspect-[3/4] rounded-xl sm:rounded-2xl overflow-hidden border border-slate-200 shadow-lg relative">
                     <Image
                         src={images[selectedImage]}
                         alt={productName}
@@ -62,3 +62,4 @@ const ProductImageGallery: React.FC<ProductImageGalleryProps> = ({ images, produ
 };
 
 export default ProductImageGallery;
+

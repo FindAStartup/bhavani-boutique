@@ -28,11 +28,11 @@ export async function deleteProductById(id: string) {
         .eq('id', id);
 }
 
-export async function findProducts(filters: { category?: string; is_draft?: boolean; search?: string; limit?: number; excludeId?: string } = {}) {
+export async function findProducts(filters: { category?: string; categoryId?: string; is_draft?: boolean; search?: string; limit?: number; excludeId?: string } = {}) {
     // 👇 2. Use createStaticClient here so the Homepage can be Static
     const supabase = await createStaticClient()
 
-    const { category, is_draft, search, limit, excludeId } = filters;
+    const { category, categoryId, is_draft, search, limit, excludeId } = filters;
 
     let query = supabase
         .from('products')
@@ -49,7 +49,9 @@ export async function findProducts(filters: { category?: string; is_draft?: bool
         query = query.or(`name.ilike.%${search}%,description.ilike.%${search}%`);
     }
 
-    if (category) {
+    if (categoryId) {
+        query = query.eq('category_id', categoryId);
+    } else if (category) {
         query = query.eq('category', category);
     }
 

@@ -4,7 +4,10 @@ import Image from 'next/image';
 import { Facebook, Instagram, Globe } from 'lucide-react';
 import FindStartupModal from '../home/FindStartupModal';
 
-const Footer = () => {
+import { listCategories } from '@/server/repositories/category.repo';
+
+const Footer = async () => {
+    const categories = await listCategories();
     return (
         <footer className="bg-stone-50 pt-8 pb-4 border-t border-stone-200">
             <div className="w-full px-6 lg:px-12">
@@ -28,11 +31,9 @@ const Footer = () => {
                     <div className="pt-3">
                         <h4 className="font-bold text-sm uppercase tracking-widest mb-6">Shopping</h4>
                         <ul className="space-y-4 text-sm text-slate-500">
-                            <li><Link className="hover:text-primary transition-colors" href="/category/Cordset">Cordset</Link></li>
-                            <li><Link className="hover:text-primary transition-colors" href="/category/Saree">Saree</Link></li>
-                            <li><Link className="hover:text-primary transition-colors" href="/category/Kurties">Kurties</Link></li>
-                            <li><Link className="hover:text-primary transition-colors" href="/category/Set-mund">Set Mund</Link></li>
-                            <li><Link className="hover:text-primary transition-colors" href="/category/Bottoms">Bottoms</Link></li>
+                            {categories.map(category => (
+                                <li key={category.id}><Link className="hover:text-primary transition-colors" href={`/category/${category.slug}`}>{category.name}</Link></li>
+                            ))}
                         </ul>
                     </div>
                     <div className="pt-3">
@@ -72,3 +73,4 @@ const Footer = () => {
 };
 
 export default Footer;
+

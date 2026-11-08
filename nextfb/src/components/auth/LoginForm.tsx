@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@/supabase/client';
 import { Eye, EyeOff, Loader } from 'lucide-react';
+import { isValidEmail } from '@/lib/auth-validation';
 import { getUserRole } from '@/server/actions/auth.actions';
 
 interface LoginFormProps {
@@ -21,12 +22,17 @@ const LoginForm: React.FC<LoginFormProps> = ({ onForgotPassword }) => {
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
+        const normalizedEmail = email.trim();
+        if (!isValidEmail(normalizedEmail)) {
+            setError('Enter a valid email address.');
+            return;
+        }
         setLoading(true);
         setError(null);
 
         try {
             const { error } = await supabase.auth.signInWithPassword({
-                email,
+                email: normalizedEmail,
                 password
             });
 
@@ -69,6 +75,8 @@ const LoginForm: React.FC<LoginFormProps> = ({ onForgotPassword }) => {
                     <div className="relative">
                         <input
                             type="email"
+                            autoComplete="email"
+                            maxLength={254}
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg text-sm outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-[#161811]"
@@ -92,6 +100,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onForgotPassword }) => {
                     <div className="relative">
                         <input
                             type={showPassword ? 'text' : 'password'}
+                            autoComplete="current-password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             className="w-full pl-4 pr-10 py-3 bg-white border border-slate-200 rounded-lg text-sm outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-[#161811] placeholder:text-slate-400 tracking-widest"
@@ -123,4 +132,5 @@ const LoginForm: React.FC<LoginFormProps> = ({ onForgotPassword }) => {
 };
 
 export default LoginForm;
+
 

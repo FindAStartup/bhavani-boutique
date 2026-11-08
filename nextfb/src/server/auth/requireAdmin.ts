@@ -13,7 +13,7 @@ export async function requireAdmin() {
     const { data: profile } = await findUserProfileById(user.id)
 
     if (profile?.role !== 'admin') {
-        redirect('/admin')
+        redirect('/')
     }
 
     return user

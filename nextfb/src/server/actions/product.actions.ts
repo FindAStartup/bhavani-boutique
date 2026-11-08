@@ -1,10 +1,12 @@
 'use server'
 
+import { requireAdmin } from '@/server/auth/requireAdmin'
 import { revalidatePath } from 'next/cache'
 import * as productService from '../services/product.service'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function createProduct(formData: any) {
+    await requireAdmin();
     try {
         const product = await productService.createProductService(formData);
         revalidatePath('/products')
@@ -52,6 +54,7 @@ export async function getProductById(id: string) {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function updateProduct(id: string, formData: any) {
+    await requireAdmin();
     try {
         const product = await productService.updateProductService(id, formData);
         revalidatePath(`/products/${id}`)
@@ -65,6 +68,7 @@ export async function updateProduct(id: string, formData: any) {
 }
 
 export async function deleteProduct(id: string) {
+    await requireAdmin();
     try {
         await productService.deleteProductService(id);
         revalidatePath('/products')
@@ -90,5 +94,6 @@ export async function getRelatedProducts(category: string, currentProductId: str
         return { error: error.message };
     }
 }
+
 
 

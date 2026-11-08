@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import AdminHeader from '@/components/admin/AdminHeader';
 import ImageUpload from '@/components/admin/ImageUpload';
+import type { Category } from '@/lib/categories';
+import type { EditableImage, SavedImageCrop } from '@/lib/image-crop';
 import ProductPreviewModal from '@/components/admin/ProductPreviewModal';
 import { Save, Eye, FileText, Loader2 } from 'lucide-react';
 import { upsertProduct } from '@/server/actions/admin.actions';
@@ -11,7 +13,6 @@ import { createClient } from '@/supabase/client';
 import { useSearchParams } from 'next/navigation';
 import { Suspense, useEffect } from 'react';
 
-const CATEGORIES = ['Cordset', 'Saree', 'Kurties', 'Set Mund', 'Bottoms'];
 const SIZES = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 
 export default function AddProductPage() {
@@ -28,12 +29,15 @@ function AddProduct() {
     const productId = searchParams.get('id');
     const supabase = createClient();
 
-    const [images, setImages] = useState<{ url: string; isUploading?: boolean; file?: File }[]>([]);
+    const [categories, setCategories] = useState<Pick<Category, 'id' | 'name'>[]>([]);
+    const [categoryError, setCategoryError] = useState('');
+    const [images, setImages] = useState<EditableImage[]>([]);
+    const [imagesUploading, setImagesUploading] = useState(false);
     const [formData, setFormData] = useState({
         name: '',
         description: '',
         price: '',
-        category: CATEGORIES[0],
+        category_id: '',
         material_care: '',
         sustainability_impact: '',
         delivery_days: '7',
@@ -60,12 +64,13 @@ function AddProduct() {
                         name: product.name,
                         description: product.description || '',
                         price: product.price.toString(),
-                        category: product.category,
+                        category_id: product.category_id ?? '',
                         material_care: product.material_care || '',
                         sustainability_impact: product.sustainability_impact || '',
                         delivery_days: (product.delivery_days || 7).toString(), // Default to 7 if null
                     });
-                    setImages(product.images.map((url: string) => ({ url, isUploading: false })));
+                    const crops: Record<string, SavedImageCrop> = product.image_crops ?? {};
+                    setImages((product.images ?? []).map((url: string) => ({ url, crop: crops[url] })));
 
                     // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     const sizes = product.product_stock.map((s: any) => s.size);
@@ -83,6 +88,19 @@ function AddProduct() {
             fetchProductDetails();
         }
     }, [productId, supabase]);
+
+    useEffect(() => {
+        let active = true;
+        async function loadCategories() {
+            const { data, error } = await supabase.from('categories').select('id, name')
+                .order('display_order').order('slug');
+            if (!active) return;
+            if (error) setCategoryError('Could not load categories.');
+            else setCategories(data);
+        }
+        void loadCategories();
+        return () => { active = false; };
+    }, [supabase]);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -117,6 +135,10 @@ function AddProduct() {
             alert('Valid price is required');
             return false;
         }
+        if (!categories.some(category => category.id === formData.category_id)) {
+            alert('Choose a category before saving.');
+            return false;
+        }
         if (!isDraft && images.length < 4) {
             // In legacy it was 4, let's keep it or make it 1 for easier testing
             alert('Please upload at least 4 images');
@@ -130,7 +152,7 @@ function AddProduct() {
     };
 
     const handleSubmit = async (isDraft = false) => {
-        if (!validateForm(isDraft)) return;
+        if (loading || imagesUploading || !validateForm(isDraft)) return;
 
         setLoading(true);
         try {
@@ -139,11 +161,12 @@ function AddProduct() {
                 name: formData.name,
                 description: formData.description,
                 price: parseFloat(formData.price),
-                category: formData.category,
+                category_id: formData.category_id,
                 material_care: formData.material_care,
                 sustainability_impact: formData.sustainability_impact,
                 delivery_days: parseInt(formData.delivery_days),
                 images: images.map(img => img.url),
+                image_crops: Object.fromEntries(images.flatMap(image => image.crop ? [[image.url, image.crop]] : [])),
                 stock: stock,
                 is_draft: isDraft
             };
@@ -203,15 +226,17 @@ function AddProduct() {
                                     </label>
                                     <div className="relative">
                                         <select
-                                            name="category"
-                                            value={formData.category}
+                                            name="category_id"
+                                            value={formData.category_id}
                                             onChange={handleInputChange}
                                             className="w-full px-4 py-3 rounded-lg border border-stone-200 focus:border-[#5d6b2e] focus:ring-1 focus:ring-[#5d6b2e] transition-all outline-none text-stone-800 appearance-none bg-white"
                                         >
-                                            {CATEGORIES.map(cat => (
-                                                <option key={cat} value={cat}>{cat}</option>
+                                            <option value="" disabled>Choose a category</option>
+                                            {categories.map(cat => (
+                                                <option key={cat.id} value={cat.id}>{cat.name}</option>
                                             ))}
                                         </select>
+                                        {categoryError && <p role="alert" className="mt-1 text-sm text-red-700">{categoryError}</p>}
                                         <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-stone-400">
                                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
                                         </div>
@@ -356,14 +381,14 @@ function AddProduct() {
                 {/* Right Column - Images & Actions */}
                 <div className="space-y-6">
                     <section className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-                        <ImageUpload images={images} setImages={setImages} />
+                        <ImageUpload images={images} setImages={setImages} onUploadingChange={setImagesUploading} disabled={loading} />
                     </section>
 
                     {/* Action Buttons */}
                     <section className="space-y-3">
                         <button
                             onClick={() => handleSubmit(false)}
-                            disabled={loading}
+                            disabled={loading || imagesUploading}
                             className="w-full bg-[#550000] hover:bg-[#440000] text-white font-semibold py-3 px-4 rounded-lg shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                             {loading ? <Loader2 className="animate-spin w-5 h-5" /> : <Save size={20} />}
@@ -380,7 +405,7 @@ function AddProduct() {
 
                         <button
                             onClick={() => handleSubmit(true)}
-                            disabled={loading}
+                            disabled={loading || imagesUploading}
                             className="w-full bg-white border-2 border-[#FFD700] hover:bg-[#FFD700]/10 text-slate-700 font-semibold py-3 px-4 rounded-lg transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                             <FileText size={20} />
@@ -396,6 +421,7 @@ function AddProduct() {
                 onClose={() => setShowPreview(false)}
                 productData={{
                     ...formData,
+                    category: categories.find(category => category.id === formData.category_id)?.name,
                     images: images.map(img => img.url),
                     stock: stock
                 }}
@@ -403,4 +429,6 @@ function AddProduct() {
         </div >
     );
 }
+
+
 

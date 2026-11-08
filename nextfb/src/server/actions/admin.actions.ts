@@ -1,10 +1,12 @@
 'use server';
 
 import { createClient } from '@/supabase/server';
+import { requireAdmin } from '@/server/auth/requireAdmin'
 import { revalidatePath } from 'next/cache';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function upsertProduct(productData: any) {
+    await requireAdmin();
     const supabase = await createClient();
     const { id, stock, ...productFields } = productData;
 
@@ -71,6 +73,7 @@ export async function upsertProduct(productData: any) {
 }
 
 export async function getDrafts() {
+    await requireAdmin();
     const supabase = await createClient();
 
     const { data: products, error } = await supabase
@@ -91,6 +94,7 @@ export async function getDrafts() {
 }
 
 export async function getPublishedProducts() {
+    await requireAdmin();
     const supabase = await createClient();
 
     const { data: products, error } = await supabase
@@ -111,6 +115,7 @@ export async function getPublishedProducts() {
 }
 
 export async function deleteProduct(productId: string) {
+    await requireAdmin();
     const supabase = await createClient();
 
     try {
@@ -147,6 +152,7 @@ export async function deleteProduct(productId: string) {
 }
 
 export async function publishProduct(productId: string) {
+    await requireAdmin();
     const supabase = await createClient();
 
     try {
@@ -170,4 +176,5 @@ export async function publishProduct(productId: string) {
         return { error: error.message };
     }
 }
+
 
